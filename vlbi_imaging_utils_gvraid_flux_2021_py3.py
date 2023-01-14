@@ -2373,7 +2373,7 @@ def load_obs_uvfits(filename, flipbl=False):
 
     return Obsdata(ra, dec, rf, bw, datatable, tarr, source=src, mjd=mjd, ampcal=True, phasecal=True)
 
-def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=False, renorm_flux=False, renorm_num=1, airmass=False,visdata=False):
+def load_obs_oifits(filename, flux=1.0, specavg=False, specbin=1, rescale_flux=False, renorm_flux=False, renorm_num=1, airmass=False,visdata=False):
     """Load data from an oifits file
         Does NOT currently support polarization
         """
@@ -2430,11 +2430,11 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
     #print "bw=", bw
     
 
-    if specavg==1:
-        print("*** specavg = 1, nwav_ori=",nwav_ori)
+    if specavg:
+        print("*** specavg is True, nwav_ori=",nwav_ori)
         if nwav_ori == 210:
             print("detect 210 wavelengths, I suppose you're using the MED mode.")
-            print("specavg = 1, re-binning the data with every",specbin,"channels")
+            print("specavg is True, re-binning the data with every",specbin,"channels")
             n_bin = specbin
             nwav = nwav_ori/n_bin
             print("now nwav=",nwav)
@@ -2457,7 +2457,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
             print("bw.shape=",bw.shape)
             print("bw=",bw)
             
-            #load in the u and v coordinate, this is the same as specavg=-1
+            #load in the u and v coordinate, this is the same as specavg is false
             u = np.array([vis_data[i].ucoord for i in range(len(vis_data))])
             v = np.array([vis_data[i].vcoord for i in range(len(vis_data))])
             print("u.shape=",u.shape)
@@ -2472,7 +2472,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
 
         elif nwav_ori == 233:
             print("detect 233 wavelengths, I suppose you're using the MED mode.")
-            print("specavg = 1, re-binning the data with every",specbin,"channels")
+            print("specavg is True, re-binning the data with every",specbin,"channels")
             n_bin = specbin
             nwav = int(np.floor(nwav_ori/n_bin))
             print("now nwav=",nwav)
@@ -2495,7 +2495,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
             print("bw.shape=",bw.shape)
             print("bw=",bw)
             
-            #load in the u and v coordinate, this is the same as specavg=-1
+            #load in the u and v coordinate, this is the same as specavg is False
             u = np.array([vis_data[i].ucoord for i in range(len(vis_data))])
             v = np.array([vis_data[i].vcoord for i in range(len(vis_data))])
             print("u.shape=",u.shape)
@@ -2510,7 +2510,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
             
         elif nwav_ori == 1628:
             print("detect 1628 wavelengths, I suppose you're using the HIGH mode.")
-            print("specavg = 1, re-binning the data with every",specbin,"channels")
+            print("specavg is True, re-binning the data with every",specbin,"channels")
             n_bin = specbin
             nwav = int(np.floor(nwav_ori/n_bin))
             print("now nwav=",nwav)
@@ -2533,7 +2533,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
             print("bw.shape=",bw.shape)
             print("bw=",bw)
             
-            #load in the u and v coordinate, this is the same as specavg=-1
+            #load in the u and v coordinate, this is the same as specavg is False
             u = np.array([vis_data[i].ucoord for i in range(len(vis_data))])
             v = np.array([vis_data[i].vcoord for i in range(len(vis_data))])
             print("u.shape=",u.shape)
@@ -2588,8 +2588,10 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
         #u = np.array([vis_data[i].ucoord/wavelength for i in range(len(vis_data))])
         #v = np.array([vis_data[i].vcoord/wavelength for i in range(len(vis_data))])
         
-        print("specavg=-1, no spectral averaging.")
+        print("specavg is False, no spectral averaging.")
+        
         nwav = nwav_ori
+        print("nwav_ori=",nwav_ori)
         rf = frequency     # here I change the reference frequency to the first channel central frequency
         bw = C/(wavelength-bandpass/2.0) - C/(wavelength+bandpass/2.0)
         print("rf=", rf)
@@ -2942,7 +2944,7 @@ def load_obs_oifits(filename, flux=1.0, specavg=-1, specbin=1, rescale_flux=Fals
         print("vis_mid_cal[0,:,:]=",vis_mid_cal[0,:,:])
         print("vis_mid_cal[0,:,:].shape=",vis_mid_cal[0,:,:].shape)
     #re-binning the visibility data
-    if specavg==1:
+    if specavg:
         if nwav_ori == 210 or nwav_ori == 233 or nwav_ori == 1628:
             for i in range(nwav):
                 for j in range(n_bin):
