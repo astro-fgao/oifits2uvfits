@@ -8,8 +8,12 @@ Code usage:
 
     python oifits2uvfits input_oifits_file_name output_oifits_file_name
     
+    
 VISDATA or VIS_AMP & VIS_PHI
+
 During the conversion, the user can choose whether to use the VISDATA column (--VISDATA = True) or use the VIS_AMP and VIS_PHI column (default case). 
 
-spectral averaging
+
+Spectral averaging
+
 The user can also specify how many channels they want to average during the conversion step (--specavg=True and --specbin= number of channels to average. default: no averaging)
