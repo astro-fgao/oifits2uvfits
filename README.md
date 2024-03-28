@@ -1,19 +1,34 @@
 # oifits2uvfits
-scripts to convert oifits file into uvfits format
+Python scripts to convert oifits file into uvfits format.
 
 This package convert oifits format (widely used in optical/IR interferometry) to uvfits format (widely used in radio interferometry). Initially based on the eht-imaging package, the code was much tailored to the GRAVITY instrument (espeically to the Galactic Center user cases). 
 
 
-Code usage:
+Code usage: 
 
-    python oifits2uvfits input_oifits_file_name output_oifits_file_name
+	python oi2uv.py [-h] [--output OUTPUT] [--rescale_flux RESCALE_FLUX]
+                [--renorm_flux RENORM_FLUX] [--renorm_num RENORM_NUM]
+                [--airmass AIRMASS] [--visdata VISDATA] [--specavg SPECAVG]
+                [--specbin SPECBIN]
+                input
+
     
-    
-VISDATA or VIS_AMP & VIS_PHI
+Options:
 
-During the conversion, the user can choose whether to use the VISDATA column (--VISDATA = True) or use the VIS_AMP and VIS_PHI column (default case). 
-
-
-Spectral averaging
-
-The user can also specify how many channels they want to average during the conversion step (--specavg=True and --specbin= number of channels to average. default: no averaging)
+	-h, --help            			show this help message and exit
+ 	
+	--output OUTPUT       			output uvfits name
+ 
+ 	--rescale_flux RESCALE_FLUX		whether to rescale flux (default: False)
+  
+  	--renorm_flux RENORM_FLUX		whether to renormalize flux (default: False)
+  
+  	--renorm_num RENORM_NUM			renormalize number (default: 0)
+  
+  	--airmass AIRMASS     			whether to correct for airmass (default: False)
+  
+  	--visdata VISDATA     			whether to read in visdata instead of vis_amp and vis_phi (default: False)
+  
+  	--specavg SPECAVG     			whether to do spectral averaging (default: False)
+  
+  	--specbin SPECBIN     			how many channels to averaging (default: 1)
