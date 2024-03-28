@@ -21,14 +21,19 @@ Options:
  
  	--rescale_flux RESCALE_FLUX		whether to rescale flux (default: False)
   
-  	--renorm_flux RENORM_FLUX		whether to renormalize flux (default: False)
+  	--renorm_flux RENORM_FLUX		(*) whether to renormalize flux (default: False)
   
-  	--renorm_num RENORM_NUM			renormalize number (default: 0)
+  	--renorm_num RENORM_NUM			(*) renormalize number (default: 0)
   
-  	--airmass AIRMASS     			whether to correct for airmass (default: False)
-  
-  	--visdata VISDATA     			whether to read in visdata instead of vis_amp and vis_phi (default: False)
+  	--airmass AIRMASS     			(*) whether to correct for airmass (default: False)
+  						
+  	--visdata VISDATA     			whether to read in visdata instead of vis_amp and 
+   						vis_phi (default: False)
   
   	--specavg SPECAVG     			whether to do spectral averaging (default: False)
   
   	--specbin SPECBIN     			how many channels to averaging (default: 1)
+
+Please note that (*) denotes the options which are used internally and not yet available in this public branch yet.
+
+For further information or feedback, please contact me at fgao@mpifr-bonn.mpg.de
